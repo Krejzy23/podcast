@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import LeftSidebar from "@/components/LeftSidebar";
 
 export default function RootLayout({
   children,
@@ -6,8 +6,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <div>
+      <main>
+        <LeftSidebar />
+        {children}
+        <p className="text-white-1">RIGHT SIDEBAR</p>
+      </main>
+    </div>
   );
 }
