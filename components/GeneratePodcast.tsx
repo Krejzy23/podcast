@@ -4,17 +4,46 @@ import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
 import { Button } from './ui/button'
 import { Loader } from 'lucide-react'
+import { useAction } from 'convex/react'
+import { api } from '@/convex/_generated/api'
 
-const useGeneratePodcast = (props: GeneratePodcastProps) => {
+const useGeneratePodcast = ({
+  setAudio, voiceType, voicePrompt, setAudioStorageId
+} : GeneratePodcastProps) => {
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const getPodcastAudio = useAction(api.openai.generateAudioAction)
+
+  const generatePodcast = async () => {
+    setIsGenerating(true);
+    setAudio('');
+
+    if (!voicePrompt) {
+      setIsGenerating(false);
+      return;
+    }
+
+    try {
+      const response = await getPodcastAudio({
+        voice: voiceType,
+        input: voicePrompt,
+      });
+      // Předpokládám, že tady nastavíš audio pomocí setAudio nebo setAudioStorageId
+      setIsGenerating(false);
+    } catch (error) {
+      console.log('Error generating podcast', error);
+      setIsGenerating(false);
+    }
+  }
 
   return {
-    isGenerating: false,
-    generatePodcast: () => {}
+    isGenerating,
+    generatePodcast
   }
 }
 
 const GeneratePodcast = (props: GeneratePodcastProps) => {
-  const {isGenerating, generatePodcast} = useGeneratePodcast(props);
+  const { isGenerating, generatePodcast } = useGeneratePodcast(props);
 
   return (
     <div>
