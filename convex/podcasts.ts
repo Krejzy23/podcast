@@ -60,3 +60,13 @@ export const getTrendingPodcasts = query({
     return podcast.sort((a, b) => b.views - a.views).slice(0, 8);
   },
 });
+
+// this query will get the podcast by the podcastId.
+export const getPodcastById = query({
+  args: {
+    podcastId: v.id("podcasts"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.podcastId);
+  },
+});
