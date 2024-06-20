@@ -7,8 +7,9 @@ import { Loader } from 'lucide-react'
 import { useAction, useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { v4 as uuidv4 } from "uuid"
-import { generateUploadUrl } from '@/convex/files'
 import { useUploadFiles } from '@xixixao/uploadstuff/react';
+import { toast, useToast } from './ui/use-toast'
+
 
 const useGeneratePodcast = ({
   setAudio, voiceType, voicePrompt, setAudioStorageId
@@ -17,17 +18,21 @@ const useGeneratePodcast = ({
 
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   
-  const { startUpload } = useUploadFiles(generateUploadUrl)
+  const { startUpload } = useUploadFiles(generateUploadUrl);
 
-  const getPodcastAudio = useAction(api.openai.generateAudioAction)
+  const getPodcastAudio = useAction(api.openai.generateAudioAction);
+
+  const getAudioUrl = useMutation(api.podcasts.getUrl);
 
   const generatePodcast = async () => {
     setIsGenerating(true);
     setAudio('');
 
     if (!voicePrompt) {
-      setIsGenerating(false);
-      return;
+      toast({
+        title: "Please provide a voiceType to generate a podcast",
+      })
+      return setIsGenerating(false);
     }
 
     try {
@@ -48,9 +53,16 @@ const useGeneratePodcast = ({
       const audioUrl = await getAudioUrl({ storageId });
       setAudio(audioUrl!);
       setIsGenerating(false);
+      toast({
+        title: "Podcast generated successfully",
+      })
       
     } catch (error) {
       console.log('Error generating podcast', error);
+      toast({
+        title: "Error creating a podcast",
+        variant: 'destructive',
+      })
       setIsGenerating(false);
     }
   }
