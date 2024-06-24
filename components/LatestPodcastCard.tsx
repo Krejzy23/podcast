@@ -67,37 +67,38 @@ const LatestPodcastCard = ({
           className="aspect-square rounded-lg cursor-pointer"
           onClick={handleViews}
         />
-        <div className="flex w-full flex-row gap-5 max-md:items-center md:gap-9">
-          <article className="flex flex-row items-center justify-between gap-5 md:gap-10 xl:gap-20">
-            <div className="flex flex-col w-[100px] md:w-[200px] 2xl:w-[400px]">
-              <h1 className="text-20 font-extrabold tracking-[-0.32px] text-white-1">
+        <div className="flex w-full flex-col md:flex-row gap-5 max-md:items-center md:gap-9">
+          <article className="flex md:flex-row flex-col items-center justify-between gap-5 md:gap-10 xl:gap-20">
+            <div className="flex flex-col w-[50px] md:w-[100px] lg:w-[200px] xl:w-[300px] 2xl:w-[500px]">
+              <h1 className="text-5 md:text-10 lg:text-20 font-extrabold tracking-[-0.32px] text-white-1">
                 {title}
               </h1>
-              <h2 className="text-14 font-normal text-white-3">Author:{" "}{author}</h2>
+              <h2 className="text-14 font-normal text-white-3">
+                Author: {author}
+              </h2>
             </div>
-            <div className="flex flex-row items-center gap-4">
-                <Image 
+            <div className="flex md:flex-row flex-col gap-2">
+              <div className="flex flex-row items-center gap-2">
+                <Image
                   src="/icons/headphone.svg"
                   alt="headphone"
                   width={24}
                   height={24}
                 />
-                <p className="text-16 text-white-1 font-bold">
-                {views}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <Image
-                src="/icons/clock.svg"
-                alt="clock"
-                width={24}
-                height={24}
-                className="text-white-1"
-              />
-              <p className="text-16 p-2 text-white-1 font-bold">
-                {Math.floor(duration / 60)}:
-                {("0" + Math.floor(duration % 60)).slice(-2)}
-              </p>
+                <p className="text-16 text-white-1 font-bold p-2">{views}</p>
+              </div>
+              <div className="flex flex-row items-center gap-2">
+                <Image
+                  src="/icons/clock.svg"
+                  alt="clock"
+                  width={24}
+                  height={24}
+                />
+                <p className="text-16 p-2 text-white-1 font-bold">
+                  {Math.floor(duration / 60)}:
+                  {("0" + Math.floor(duration % 60)).slice(-2)}
+                </p>
+              </div>
             </div>
           </article>
           <div className="flex justify-end">
