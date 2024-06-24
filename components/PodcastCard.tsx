@@ -1,4 +1,6 @@
+import { api } from '@/convex/_generated/api'
 import { PodcastCardProps } from '@/types'
+import { useMutation } from 'convex/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -7,14 +9,18 @@ const PodcastCard = ({
   imgUrl, title, description, podcastId
 }: PodcastCardProps) => {
   const router = useRouter()
+  const updatePodcastViews = useMutation(api.podcasts.updatePodcastViews);
 
-  const handleViews = () => {
-    // increase views
-
-    router.push(`/podcasts/${podcastId}`, {
-      scroll: true
-    })
-  }
+  const handleViews = async () => {
+    try {
+      await updatePodcastViews({ podcastId }); // Zaznamenání zvýšení počtu zobrazení
+      router.push(`/podcasts/${podcastId}`, {
+        scroll: true
+      });
+    } catch (error) {
+      console.error('Failed to update views', error);
+    }
+  };
 
   return (
     <div className="cursor-pointer" onClick={handleViews}>
