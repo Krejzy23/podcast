@@ -14,6 +14,7 @@ const LatestPodcastCard = ({
   author,
   podcastId,
   podcastTitle,
+  views,
 }: LatestPodcastCardProps) => {
   const router = useRouter();
   const { setAudio } = useAudio();
@@ -67,25 +68,30 @@ const LatestPodcastCard = ({
           onClick={handleViews}
         />
         <div className="flex w-full flex-row gap-5 max-md:items-center md:gap-9">
-          <article className="flex flex-row items-center justify-between gap-5 xl:gap-20">
-            <h1 className="text-18 w-[100px] font-extrabold tracking-[-0.32px] text-white-1">
-              {title}
-            </h1>
-            <h2 className="text-16 font-normal text-white-3">{author}</h2>
-            <div className="">
+          <article className="flex flex-row items-center justify-between gap-5 md:gap-10 xl:gap-20">
+            <div className="flex flex-col w-[100px] md:w-[200px] 2xl:w-[400px]">
+              <h1 className="text-20 font-extrabold tracking-[-0.32px] text-white-1">
+                {title}
+              </h1>
+              <h2 className="text-14 font-normal text-white-3">Author:{" "}{author}</h2>
+            </div>
+            <div className="flex flex-row items-center gap-4">
                 <Image 
                   src="/icons/headphone.svg"
                   alt="headphone"
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
                 />
+                <p className="text-16 text-white-1 font-bold">
+                {views}
+              </p>
             </div>
             <div className="flex items-center">
               <Image
                 src="/icons/clock.svg"
                 alt="clock"
-                width={32}
-                height={32}
+                width={24}
+                height={24}
                 className="text-white-1"
               />
               <p className="text-16 p-2 text-white-1 font-bold">

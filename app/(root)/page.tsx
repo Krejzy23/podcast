@@ -7,6 +7,7 @@ import LatestPodcastCard from "@/components/LatestPodcastCard";
 const Home = () => {
   const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);
   const latestPodcastCard = useQuery(api.podcasts.getLatestPodcastCard);
+  
 
   return (
     <div className="mt-9 flex flex-col gap-9 md:overflow-hidden">
@@ -37,6 +38,7 @@ const Home = () => {
               author,
               audioUrl,
               audioDuration,
+              views,
             }) => (
               <LatestPodcastCard
                 key={_id}
@@ -47,6 +49,7 @@ const Home = () => {
                 audioUrl={audioUrl!}
                 audioDuration={audioDuration}
                 podcastTitle={podcastTitle}
+                views={views}
               />
             )
           )}
