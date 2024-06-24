@@ -67,8 +67,8 @@ const LatestPodcastCard = ({
           onClick={handleViews}
         />
         <div className="flex w-full flex-row gap-5 max-md:items-center md:gap-9">
-          <article className="flex flex-row items-center justify-between gap-20">
-            <h1 className="text-18 font-extrabold tracking-[-0.32px] text-white-1">
+          <article className="flex flex-row items-center justify-between gap-5 xl:gap-20">
+            <h1 className="text-18 w-[100px] font-extrabold tracking-[-0.32px] text-white-1">
               {title}
             </h1>
             <h2 className="text-16 font-normal text-white-3">{author}</h2>
