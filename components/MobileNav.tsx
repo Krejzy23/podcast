@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import router from "next/router";
+
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -55,7 +55,7 @@ const MobileNav = () => {
                       className={cn(
                         "flex gap-3 items-center py-4 max-lg:px-4 justify-start",
                         {
-                          "bg-nav-focus border-r-4 border-orange-1": isActive,
+                          "bg-nav-focus border-r-4 border-orange-1" : isActive,
                         }
                       )}
                     >

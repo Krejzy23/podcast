@@ -105,7 +105,7 @@ export const getTrendingPodcasts = query({
   handler: async (ctx) => {
     const podcast = await ctx.db.query("podcasts").collect();
 
-    return podcast.sort((a, b) => b.views - a.views).slice(0, 8);
+    return podcast.sort((a, b) => b.views - a.views).slice(0, 4);
   },
 });
 
@@ -203,5 +203,17 @@ export const deletePodcast = mutation({
     await ctx.storage.delete(args.imageStorageId);
     await ctx.storage.delete(args.audioStorageId);
     return await ctx.db.delete(args.podcastId);
+  },
+});
+
+export const getLatestPodcastCard = query({
+  handler: async (ctx) => {
+    const podcasts = await ctx.db.query("podcasts").order("desc").take(4);
+
+    return podcasts.map(p => ({
+      ...p,
+      audioDuration: p.audioDuration,
+      audioUrl: p.audioUrl,
+    }));
   },
 });
