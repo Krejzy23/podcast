@@ -20,6 +20,7 @@ export default defineSchema({
     views: v.number(),
     createdAt: v.optional(v.string()), // Make createdAt optional
   })
+    .index("by_authorId", ["authorId"])
     .searchIndex('search_author', { searchField: 'author' })
     .searchIndex('search_title', { searchField: 'podcastTitle' })
     .searchIndex('search_body', { searchField: 'podcastDescription' }),

@@ -71,8 +71,6 @@ export interface GenerateThumbnailProps {
 export interface LatestPodcastCardProps {
   imgUrl: string;
   title: string;
-  audioUrl: string;
-  author: string;
   audioDuration: number;
   podcastTitle: string;
   views: number;

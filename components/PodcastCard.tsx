@@ -13,7 +13,7 @@ const PodcastCard = ({
 
   const handleViews = async () => {
     try {
-      await updatePodcastViews({ podcastId }); // Zaznamenání zvýšení počtu zobrazení
+      await updatePodcastViews({ podcastId }); // Zvýšení počtu zhlédnutí
       router.push(`/podcasts/${podcastId}`, {
         scroll: true
       });

@@ -211,9 +211,11 @@ export const getLatestPodcastCard = query({
     const podcasts = await ctx.db.query("podcasts").order("desc").take(4);
 
     return podcasts.map(p => ({
-      ...p,
+      _id: p._id,
+      podcastTitle: p.podcastTitle,
       audioDuration: p.audioDuration,
-      audioUrl: p.audioUrl,
+      imageUrl: p.imageUrl,
+      views: p.views,
     }));
   },
 });
